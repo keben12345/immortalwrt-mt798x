@@ -6,7 +6,7 @@
 		led-boot = &red_led;
 		led-failsafe = &red_led;
 		led-running = &white_led;
-		led-upgrade = &red_led;
+		led-upgrade = &white_led;
 	};
 
 	memory {
