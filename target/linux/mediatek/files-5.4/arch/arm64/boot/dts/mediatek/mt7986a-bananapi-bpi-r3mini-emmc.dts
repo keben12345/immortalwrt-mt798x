@@ -189,6 +189,7 @@
 	status = "okay";
 
 	gmac0: mac@0 {
+		
 		compatible = "mediatek,eth-mac";
 		reg = <0>;
 		phy-mode = "2500base-x";
@@ -201,6 +202,7 @@
 	};
 
 	gmac1: mac@1 {
+		label = "wan";
 		compatible = "mediatek,eth-mac";
 		reg = <1>;
 		phy-mode = "2500base-x";
@@ -245,9 +247,9 @@
 };
 
 &hnat {
-	mtketh-wan = "eth1";
+	mtketh-wan = "wan";
 	mtketh-lan = "eth0";
-	ext-devices-prefix = "usb", "wwan","rmnet","eth2","eth3","eth4","eth5";
+	mtketh-ppd = "wan";
 	mtketh-max-gmac = <2>;
 	status = "okay";
 };
@@ -320,6 +322,12 @@
 */
 
 &pio {
+	/* GPIO 11 NGFF_GNSS_OFF. output-high: enable, output-low: disable */
+	gnss_off {
+		gpio-hog;
+		gpios = <11 GPIO_ACTIVE_HIGH>;
+		output-high;
+	};
 
         mmc0_pins_default: mmc0-pins-50-to-61-default {
                 mux {
@@ -396,6 +404,8 @@
 		};
 	};
 
+	 
+
 	wf_2g_5g_pins: wf_2g_5g-pins {
 		mux {
 			function = "wifi";
@@ -432,5 +442,6 @@
 };
 
 &xhci {
+	  
 	status = "okay";
 };

@@ -511,11 +511,15 @@
 #define MTK_RX_DMA_BUF_SHIFT    8
 #define RX_DMA_SPORT_SHIFT      26
 #define RX_DMA_SPORT_MASK       0xf
+#define RX_DMA_CRSN_SHIFT      18
+#define RX_DMA_CRSN_MASK       0x1f
 #else
 #define MTK_RX_DMA_BUF_LEN      0x3fff
 #define MTK_RX_DMA_BUF_SHIFT    16
 #define RX_DMA_SPORT_SHIFT      19
 #define RX_DMA_SPORT_MASK       0x7
+#define RX_DMA_CRSN_SHIFT      14
+#define RX_DMA_CRSN_MASK       0x1f
 #endif
 
 /* QDMA descriptor txd4 */
@@ -558,7 +562,7 @@
 #define RX_DMA_SPECIAL_TAG	BIT(22)		/* switch header in packet */
 
 #define RX_DMA_GET_SPORT(_x) 	(((_x) >> RX_DMA_SPORT_SHIFT) & RX_DMA_SPORT_MASK)
-
+#define RX_DMA_GET_CRSN(_x) 	(((_x) >> RX_DMA_CRSN_SHIFT) & RX_DMA_CRSN_MASK)
 /* PDMA V2 descriptor rxd3 */
 #define RX_DMA_VTAG_V2          BIT(0)
 #define RX_DMA_L4_VALID_V2      BIT(2)

@@ -33,7 +33,7 @@ return view.extend({
 		o.rmempty = false;
 		
 		o = s.option(form.Flag, 'smarthqos', _('SMART_HWQOS'),
-		_('Enabling fair queue will automatically perform hardware offloading and forwarding for small packets, P2P downloads, and web browsing. After enabling, the maximum number available for IP speed limit will be limited to 25.'));
+		_('Enabling fair queue will automatically perform hardware offloading for every local host'));
 		o.default = o.disabled;
 		o.rmempty = false;
 		
@@ -49,7 +49,7 @@ return view.extend({
 		
 
 
-		s = m.section(form.TableSection, 'device', _('Speed limit and route choose based on IP address(using unique comment less than 32 will enable hardware QOS)'));
+		s = m.section(form.TableSection, 'device', _('Speed limit and route choose based on IP address(Auto use hardware QOS)'));
 		s.addremove = true;
 		s.anonymous = true;
 		s.sortable = true;
@@ -85,8 +85,7 @@ return view.extend({
 		o.rmempty = false;
 
 		o = s.option(form.Value, 'comment', _('Comment'));
-		o.datatype = 'and(uinteger,min(1))';
-		o.rmempty = false;
+		o.rmempty = true;
 		
 		o = s.option(form.Value, 'interfacename', _('InterfaceName(start from 0)'));
 		o.datatype = 'and(uinteger,min(0))';

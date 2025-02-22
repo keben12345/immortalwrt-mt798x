@@ -386,6 +386,8 @@ static int hnat_hw_init(u32 ppe_id)
 	hnat_priv->g_wandev = dev_get_by_name(&init_net, hnat_priv->wan);
 
 	dev_info(hnat_priv->dev, "PPE%d hwnat start\n", ppe_id);
+	
+	spin_lock_init(&hnat_priv->entry_lock);
 
 	return 0;
 }
@@ -707,10 +709,7 @@ static int hnat_probe(struct platform_device *pdev)
 	dev_info(&pdev->dev, "lan = %s\n", hnat_priv->lan);
 
 	err = of_property_read_string(np, "mtketh-ppd", &name);
-	if (err < 0)
-		strncpy(hnat_priv->ppd, "eth0", IFNAMSIZ);
-	else
-		strncpy(hnat_priv->ppd, (char *)name, IFNAMSIZ - 1);
+	strncpy(hnat_priv->ppd, "eth0", IFNAMSIZ);
 	dev_info(&pdev->dev, "ppd = %s\n", hnat_priv->ppd);
 
 	/*get total gmac num in hnat*/
